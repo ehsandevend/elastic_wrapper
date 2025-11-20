@@ -28,18 +28,20 @@ historical_index_name = "historical_journey_v1"
 
 @v1_router.get(
     "/get_by_id",
-    response_model=DynamicDoc,
+    response_model=DynamicDoc | None,
     summary="Bulk create doc entries",
     description="Insert multiple log documents into Elasticsearch in bulk",
 )
 async def get_by_id(
     id: Annotated[str, Query(title="Query string", description="Query string for the items to search in the database that have a good match")],
     db: AsyncElasticsearch = Depends(get_read_es_client)
-) -> DynamicDoc:
+) -> DynamicDoc | None:
     try:
         repo = JourneyRepo(ElasticSearchQry(db=db, index_name=index_name))
         result = await repo.get_journey_by_id(id)
-        return DynamicDoc(id=result["_id"], source=result["_source"])
+        if result:
+            return DynamicDoc(id=result["_id"], source=result["_source"])
+        return None
 
     except Exception as e:
         logger.exception("error get doc", extra={"data": str(e)})
