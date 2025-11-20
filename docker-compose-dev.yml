@@ -17,6 +17,11 @@ services:
       - ${APP_ENVIRONMENT_VARIABLES_PATH}
     entrypoint: ["python", "/app/entrypoint.py"]
     restart: unless-stopped
+    networks:
+      - hast-network
 
 volumes:
   logs:
+networks:
+  hast-network:
+    external: true
