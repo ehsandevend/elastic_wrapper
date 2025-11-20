@@ -1,12 +1,12 @@
 services:
-  fastapi-app:
+  elastic-wrapper-app:
     build:
       context: .
       dockerfile: Dockerfile
       args:
         ENVIRONMENT: ${ENVIRONMENT}
         DOCKER_REPO_URL: ${DOCKER_REPO_URL}
-    image: no_sql_wrapper_${ENVIRONMENT}:${DOCKER_TAG}
+    image: elastic_wrapper_${ENVIRONMENT}:${DOCKER_TAG}
     environment:
       - PYTHONUNBUFFERED=1
     volumes:
