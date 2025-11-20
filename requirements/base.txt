@@ -1,0 +1,8 @@
+fastapi[standard]==0.120.4
+aiohttp==3.13.2
+python-decouple==3.8
+uvicorn[standard]==0.38.0
+elasticsearch==8.15.1
+elastic-transport==8.15.0
+fastapi-pagination==0.15.0
+orjson==3.11.4

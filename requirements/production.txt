@@ -1,0 +1,5 @@
+-r base.txt
+
+gunicorn==23.0.0
+sentry-sdk[fastapi]==2.43.0
+prometheus-fastapi-instrumentator==7.1.0

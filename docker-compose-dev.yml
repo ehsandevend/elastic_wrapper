@@ -1,0 +1,22 @@
+services:
+  fastapi-app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      args:
+        ENVIRONMENT: ${ENVIRONMENT}
+        DOCKER_REPO_URL: ${DOCKER_REPO_URL}
+    image: no_sql_wrapper_${ENVIRONMENT}:${DOCKER_TAG}
+    environment:
+      - PYTHONUNBUFFERED=1
+    volumes:
+      - logs:${APP_LOG_PATH}
+    ports:
+      - "${APP_EXTERNAL_PORT}:${APP_INTERNAL_PORT}"
+    env_file:
+      - ${APP_ENVIRONMENT_VARIABLES_PATH}
+    entrypoint: ["python", "/app/entrypoint.py"]
+    restart: unless-stopped
+
+volumes:
+  logs:
