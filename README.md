@@ -1,3 +1,3 @@
-# No SQL Wrapper
+# ElasticSearch Wrapper
 
 
